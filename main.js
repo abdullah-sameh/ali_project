@@ -1,12 +1,12 @@
 const userName = document.getElementById("userName")
 const password = document.getElementById("password")
-const form = document.querySelector("form")
+const login = document.getElementById('login')
 
-form.addEventListener("submit", (e) => {
+login.addEventListener("submit", (e) => {
   e.preventDefault()
   if (userName.value === "alhag") {
-    window.location.href = "./html_files/alhag.html"
+    window.location.href = "./pages/alhag.html"
   } else if (userName.value === "user") {
-    window.location.href === "./html_files/add.html"
+    window.location.href === "./pages/add.html"
   }
 })
