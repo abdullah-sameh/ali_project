@@ -1,0 +1,24 @@
+<!-- 
+  set search bar
+  
+  <header>
+    <form class="container" action="">
+      <input type="search" id="search" autocomplete="none" />
+      <button><i class="material-icons">search</i></button>
+    </form>
+  </header>
+
+
+
+
+
+body > main form {
+  display: flex;
+  gap: 10px;
+}
+body > main form > input {
+  flex-grow: 1;
+}
+
+}
+ -->

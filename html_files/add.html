@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- for material icons -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- for font -->
+
+    <!-- for css file -->
+    <link rel="stylesheet" href="../main.css" />
+    <link rel="stylesheet" href="../css files/add.css" />
+    <link rel="stylesheet" href="../css files/alhag.css" />
+    <title>Alhag Page</title>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <nav>
+          <section class="left">
+            <a href="./alhag.html"><img src="" alt="logo" /></a>
+          </section>
+          <section class="right">
+            <button><i class="material-icons">view_headline</i></button>
+          </section>
+        </nav>
+        <main>
+          <nav>
+            <a href="#">لوجان</a>
+            <a href="#">كليو</a>
+            <a href="#">سيمبول</a>
+            <a href="#">داستر</a>
+            <a href="#">سانديرو</a>
+            <a href="#">سانديرو استيب واي</a>
+            <a href="#">كادجار</a>
+            <a href="#">كابتشر</a>
+            <a href="#">اوبتيما</a>
+            <a href="#">رينبو</a>
+            <a href="#">سينيك</a>
+          </nav>
+        </main>
+      </div>
+    </header>
+    <main>
+      <form action="" class="container" id="addNewItem">
+        <h3>نوع المنتج</h3>
+        <div>
+          <input type="radio" name="category" id="teel" checked />
+          <label for="teel">تيل</label>
+
+          <input type="radio" name="category" id="rfrf" />
+          <label for="rfrf">رفر</label>
+
+          <input type="radio" name="category" id="speaker" />
+          <label for="speaker">سماعات</label>
+        </div>
+
+        <label for="nameItem">اسم المنتج</label>
+        <input autocomplete="none" type="text" name="nameItem" id="nameItem" />
+
+        <label for="rowPrice">سعره بالجملة</label>
+        <input
+          autocomplete="none"
+          type="number"
+          name="rowPrice"
+          id="nameItem"
+        />
+
+        <label for="sellPrice">سعر البيع</label>
+        <input
+          autocomplete="none"
+          type="number"
+          name="sellPrice"
+          id="sellPrice"
+        />
+
+        <label for="piceNum">عدد القطع</label>
+        <input autocomplete="none" type="number" name="piceNum" id="piceNum" />
+      </form>
+    </main>
+  </body>
+</html>
