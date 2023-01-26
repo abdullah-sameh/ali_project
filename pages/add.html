@@ -9,78 +9,99 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
-    <!-- for font -->
-
     <!-- for css file -->
     <link rel="stylesheet" href="../main.css" />
-    <link rel="stylesheet" href="../css files/add.css" />
-    <link rel="stylesheet" href="../css files/alhag.css" />
-    <title>Alhag Page</title>
+    <link rel="stylesheet" href="../css files/pages.css" />
+    <title>إضافة بضاعة</title>
   </head>
   <body>
     <header>
-      <div class="container">
-        <nav>
-          <section class="left">
-            <a href="./alhag.html"><img src="" alt="logo" /></a>
-          </section>
-          <section class="right">
-            <button><i class="material-icons">view_headline</i></button>
-          </section>
-        </nav>
-        <main>
-          <nav>
-            <a href="#">لوجان</a>
-            <a href="#">كليو</a>
-            <a href="#">سيمبول</a>
-            <a href="#">داستر</a>
-            <a href="#">سانديرو</a>
-            <a href="#">سانديرو استيب واي</a>
-            <a href="#">كادجار</a>
-            <a href="#">كابتشر</a>
-            <a href="#">اوبتيما</a>
-            <a href="#">رينبو</a>
-            <a href="#">سينيك</a>
-          </nav>
-        </main>
-      </div>
+    <nav class="container">
+        <section class="left">
+          <a href="./home.html">
+            <img src="../imgs/renault.png" alt="logo" />
+          </a>
+        </section>
+        <section>إضافة بضاعة</section>
     </header>
+
     <main>
-      <form action="" class="container" id="addNewItem">
-        <h3>نوع المنتج</h3>
-        <div>
-          <input type="radio" name="category" id="teel" checked />
-          <label for="teel">تيل</label>
+      <div class="container form">
+        <form id="addNewItem">
 
-          <input type="radio" name="category" id="rfrf" />
-          <label for="rfrf">رفر</label>
+        <h3>أضف عنصر جديد</h3>
 
-          <input type="radio" name="category" id="speaker" />
-          <label for="speaker">سماعات</label>
-        </div>
-
-        <label for="nameItem">اسم المنتج</label>
-        <input autocomplete="none" type="text" name="nameItem" id="nameItem" />
-
-        <label for="rowPrice">سعره بالجملة</label>
-        <input
-          autocomplete="none"
-          type="number"
-          name="rowPrice"
-          id="nameItem"
-        />
-
-        <label for="sellPrice">سعر البيع</label>
-        <input
-          autocomplete="none"
-          type="number"
-          name="sellPrice"
-          id="sellPrice"
-        />
-
-        <label for="piceNum">عدد القطع</label>
-        <input autocomplete="none" type="number" name="piceNum" id="piceNum" />
+        <section>
+          <label for="itemName">اسم المنتج</label>
+          <input placeholder="اسم المنتج" type="text" id="itemName" autocomplete="none">
+        </section>
+        <section>
+          <label class="carType">نوع العربية</label>
+          <select name="carType" id="carType">
+            <option value="">نوع العربية</option>
+            <option value="لوجان">لوجان</option>
+            <option value="كليو">كليو</option>
+            <option value="سيمبول">سيمبول</option>
+            <option value="فلونس">فلونس</option>
+            <option value="داستر">داستر</option>
+            <option value="سانديرو">سانديرو</option>
+            <option value="سانديرو استيب واي">سانديرو استيب واي</option>
+            <option value="كادجار">كادجار</option>
+            <option value="كابتشر">كابتشر</option>
+            <option value="اوبتيما">اوبتيما</option>
+            <option value="رينبو">رينبو</option>
+            <option value="سينيك">سينيك</option>
+          </select>
+        </section>
+        <section>
+          <label for="countryMade">بلد الصناعة</label>
+          <select name="countryMade" id="countryMade">
+            <option value="">بلد الصناعة</option>
+            <option value="مصري">مصري</option>
+            <option value="سوسري">سوسري</option>
+            <option value="تركي">تركي</option>
+            <option value="الماني">الماني</option>
+            <option value="بتنجاني">بتنجاني</option>
+          </select>
+        </section>
+        <section>
+          <label for="numItem">عدد القطعه</label>
+          <input placeholder="عدد القطعة" type="number" id="numItem" min="1">
+        </section>
+        <section>
+          <label for="priceRaw">سعر الجملة</label>
+          <input placeholder="سعر الجملة" type="number" id="priceRaw">
+        </section>
+        <section>
+          <label for="priceFull">سعر البيع</label>
+          <input placeholder="سعر البيع" type="number" id="priceFull">
+        </section>
+        <button type="submit">أضف</button>
       </form>
+      </div>
     </main>
+
+    <script>
+      const inputs = document.querySelectorAll('[placeholder]')
+      const selectInputs = document.querySelectorAll('[value=""]')
+      const arrInputs = []
+      const arrSelect = []
+      inputs.forEach(input => arrInputs.push(input.placeholder))
+      selectInputs.forEach(select => arrSelect.push(select.innerHTML))
+
+      function mediaQuery(x) {
+        if (x.matches) {
+          inputs.forEach((input) => input.placeholder = '')
+          selectInputs.forEach(select => select.innerHTML = '')
+        } else {
+          inputs.forEach((input, i) => input.placeholder = arrInputs[i])
+          selectInputs.forEach((select, i) => select.innerHTML = arrSelect[i])
+        }
+      }
+
+      const x = window.matchMedia("(min-width: 900px)")
+      mediaQuery(x) // Call listener function at run time
+      x.addListener(mediaQuery)
+    </script>
   </body>
 </html>

@@ -22,7 +22,7 @@ body {
   background-color: var(--black);
 }
 .container {
-  max-width: 900px;
+  max-width: 1000px;
   margin: auto;
   padding: 10px;
 }
@@ -38,6 +38,10 @@ body {
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
 }
 .background .shape {
   height: 200px;

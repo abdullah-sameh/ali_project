@@ -41,6 +41,11 @@ body > main > .carsType > a {
   background: #000;
   font-size: 35px;
   padding: 10px;
+  transition: 0.2s;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -ms-transition: 0.2s;
+  -o-transition: 0.2s;
 }
 body > main > .carsType > a:hover {
   background: var(--yellow);
@@ -105,4 +110,113 @@ button {
   background: var(--white);
   padding: 5px 10px;
   cursor: pointer;
+}
+
+/* add page */
+.container.form {
+  margin-top: 20px;
+  padding: 50px;
+}
+#addNewItem {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background: #000;
+  color: var(--white);
+  padding: 100px 20px;
+  position: relative;
+}
+#addNewItem > h3 {
+  position: absolute;
+  top: 20px;
+  background: var(--yellow);
+  color: var(--black);
+  padding: 10px;
+  right: -20px;
+  padding-right: 20px;
+}
+#addNewItem > h3::before {
+  content: '';
+  position: absolute;
+  border: 15px solid transparent;
+  border-left-color: var(--yellow);
+  border-left-width: 20px;
+  border-top-width: 0;
+  bottom: -15px;
+  right: -15px;
+}
+
+#addNewItem > section:nth-of-type(1) {
+  flex-basis: 100%;
+}
+#addNewItem > section:is(:nth-of-type(2), :nth-of-type(3)) {
+  flex-basis: calc(50% - 10px);
+}
+#addNewItem > section:is(:nth-of-type(4), :nth-of-type(5), :nth-of-type(6)) {
+  flex-basis: calc((100% / 3) - 14px);
+}
+#addNewItem > section {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  position: relative;
+}
+#addNewItem > section:is(:nth-of-type(4), :nth-of-type(5), :nth-of-type(6)) {
+  grid-template-columns: auto 100px;
+}
+#addNewItem > button {
+  all: initial;
+  padding: 15px;
+  font-size: 22px;
+  background: var(--yellow);
+  margin-top: 20px;
+  cursor: pointer;
+  text-align: center;
+}
+#addNewItem input {
+  all: initial;
+  box-sizing: border-box;
+  background: var(--white);
+  padding: 0 10px;
+  font-family: inherit;
+  font-size: 14px;
+}
+#addNewItem select {
+  all: initial;
+  box-sizing: border-box;
+  background: var(--white);
+  font-family: inherit;
+  padding: 0 10px;
+  cursor: pointer;
+  position: relative;
+}
+#addNewItem section:is(:nth-of-type(2), :nth-of-type(3))::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid transparent;
+  border-bottom-color: var(--black);
+  border-left-color: var(--black);
+  z-index: 10;
+  top: 8px;
+  left: 10px;
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+}
+@media (max-width: 900px) {
+  #addNewItem {
+    display: grid;
+  }
+  #addNewItem > section {
+    display: grid;
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+  #addNewItem label {
+    display: none;
+  }
 }

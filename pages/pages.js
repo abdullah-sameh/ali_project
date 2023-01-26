@@ -1,6 +1,7 @@
 // add header
 const header = document.querySelector("header")
-header.innerHTML = `
+if (header.innerText === "") {
+  header.innerHTML = `
     <nav class="container">
         <section class="left">
           <a href="./home.html">
@@ -30,19 +31,22 @@ header.innerHTML = `
         <a href="./snake.html">سينيك</a>
       </div>
   `
+}
 const icon = document.getElementById("icon")
 icon.innerText = "menu"
 // add search bar to all pages
 const main = document.querySelector("main")
 
-main.innerHTML = `
-<form id="search" class="container">
-  <label for="search">
-    <input type="search" />
-  </label>
-  <button type="submit"><i class="material-icons">search</i></button>
-</form>
+if (main.innerText === "") {
+  main.innerHTML = `
+    <form id="search" class="container">
+      <label for="search">
+        <input type="search" />
+      </label>
+      <button type="submit"><i class="material-icons">search</i></button>
+    </form>
 `
+}
 
 const navBtn = document.querySelector('[name="nav-btn"]')
 const types = document.querySelector(".types")
@@ -62,3 +66,5 @@ for (let link of links) {
     link.classList.add("active")
   }
 }
+
+
