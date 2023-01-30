@@ -1,8 +1,25 @@
-import React from "react";
+import { useNavigate } from "react-router";
 import Navbar from "../../components/navBar/Navbar";
+import { useDispatch } from "react-redux/es/exports";
 import "./home.css";
+import { setUser } from "../../rtk/slices/userSlice";
+import { useEffect } from "react";
 
 const Home = () => {
+  // to check if he loggedin
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!sessionStorage.getItem("user")) {
+      navigate("/");
+    } else {
+      //@ts-ignore
+      let item: string = sessionStorage.getItem("user");
+      dispatch(setUser(JSON.parse(item)));
+    }
+  }, []);
+
   return (
     <>
       <Navbar />

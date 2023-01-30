@@ -92,6 +92,12 @@
   -ms-transform: rotate(-45deg);
   -o-transform: rotate(-45deg);
 }
+
+.permission {
+  color: white;
+  text-align: center;
+}
+
 @media (max-width: 900px) {
   #addNewItem {
     display: grid;
