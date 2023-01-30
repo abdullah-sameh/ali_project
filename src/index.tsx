@@ -10,7 +10,6 @@ import { store } from "./rtk/store"
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
   <React.StrictMode>
-    console.log('hey')
     <BrowserRouter>
       <Provider store={store}>
         <App />
