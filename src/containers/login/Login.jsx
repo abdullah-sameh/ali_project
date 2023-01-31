@@ -15,11 +15,11 @@ const Login = () => {
 
   if (sessionStorage.getItem("user")) {
     //@ts-ignore
-    let item: string = sessionStorage.getItem("user");
+    let item = sessionStorage.getItem("user");
     dispatch(setUser(JSON.parse(item)));
   }
 
-  const checkUser = (e: React.SyntheticEvent) => {
+  const checkUser = (e) => {
     e.preventDefault();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCred) => {
@@ -43,7 +43,7 @@ const Login = () => {
         <div className="shape"></div>
         <div className="shape"></div>
       </div>
-      <form onSubmit={(e: React.SyntheticEvent) => checkUser(e)} id="login">
+      <form onSubmit={(e) => checkUser(e)} id="login">
         <h3>سجل دخولك</h3>
 
         <label htmlFor="username">اسم المستخدم</label>

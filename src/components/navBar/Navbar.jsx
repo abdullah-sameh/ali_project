@@ -1,15 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { RootState } from "../../rtk/store";
 import "./navbar.css";
 import logo from "../../assets/renault.png";
 
 const Navbar = () => {
-  interface User {
-    admin?: boolean;
-  }
-  const user: User = useSelector((state: RootState) => state?.user);
+  const user = useSelector((state) => state.user);
 
   return (
     <header>

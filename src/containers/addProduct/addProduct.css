@@ -1,55 +1,67 @@
-.container.form {
-  margin-top: 20px;
-  padding: 50px;
+button:hover {
+  background-image: linear-gradient(
+    rgb(0 0 0 / 0.2),
+    rgb(0 0 0 / 0.2)
+  ) !important;
 }
-#addNewItem {
+.forms > div.absolute {
+  position: absolute;
+  left: 50%;
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  transform: translateX(-50%);
+  gap: 40px;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+}
+.forms > div.absolute > p {
+  background: var(--white);
+  padding: 5px;
+}
+.format {
+  display: flex;
+  width: 100%;
+  height: 300px;
   background: #000;
-  color: var(--white);
-  padding: 100px 20px;
+  margin: 100px 0;
   position: relative;
+  overflow: hidden;
 }
-#addNewItem > h3 {
-  position: absolute;
-  top: 20px;
-  background: var(--yellow);
-  color: var(--black);
-  padding: 10px;
-  right: -20px;
-  padding-right: 20px;
-}
-#addNewItem > h3::before {
-  content: "";
-  position: absolute;
-  border: 15px solid transparent;
-  border-left-color: var(--yellow);
-  border-left-width: 20px;
-  border-top-width: 0;
-  bottom: -15px;
-  right: -15px;
+#typeCar_nameItem {
+  display: grid;
+  justify-content: center;
+  gap: 15px;
+  padding: 50px;
+  width: fit-content;
+  margin: auto;
+  color: var(--white);
 }
 
-#addNewItem > section:nth-of-type(1) {
-  flex-basis: 100%;
-}
-#addNewItem > section:is(:nth-of-type(2), :nth-of-type(3)) {
-  flex-basis: calc(50% - 10px);
-}
-#addNewItem > section:is(:nth-of-type(4), :nth-of-type(5), :nth-of-type(6)) {
-  flex-basis: calc((100% / 3) - 14px);
-}
-#addNewItem > section {
+#typeCar_nameItem > section {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 20px;
+}
+:is(#typeCar_nameItem, #itemDetails) select {
+  all: initial;
+  text-align: center;
+  box-sizing: border-box;
+  background: var(--white);
+  font-family: inherit;
+  padding: 0 10px;
+  cursor: pointer;
   position: relative;
 }
-#addNewItem > section:is(:nth-of-type(4), :nth-of-type(5), :nth-of-type(6)) {
-  grid-template-columns: auto 100px;
+:is(#typeCar_nameItem input, #itemDetails input) {
+  all: initial;
+  box-sizing: border-box;
+  background: var(--white);
+  padding: 0 10px;
+  font-family: inherit;
+  font-size: 14px;
 }
-#addNewItem > button {
+:is(#typeCar_nameItem > button, #itemDetails button ) {
   all: initial;
   padding: 15px;
   font-size: 22px;
@@ -58,56 +70,23 @@
   cursor: pointer;
   text-align: center;
 }
-#addNewItem input {
-  all: initial;
-  box-sizing: border-box;
-  background: var(--white);
-  padding: 0 10px;
-  font-family: inherit;
-  font-size: 14px;
-}
-#addNewItem select {
-  all: initial;
-  box-sizing: border-box;
-  background: var(--white);
-  font-family: inherit;
-  padding: 0 10px;
-  cursor: pointer;
-  position: relative;
-}
-#addNewItem section:is(:nth-of-type(2), :nth-of-type(3))::before {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border: 2px solid transparent;
-  border-bottom-color: var(--black);
-  border-left-color: var(--black);
-  z-index: 10;
-  top: 8px;
-  left: 10px;
-  transform: rotate(-45deg);
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
+#itemDetails {
+  width: fit-content;
+  margin: auto;
+  display: none;
+  gap: 10px;
+  color: var(--white);
 }
 
-.permission {
-  color: white;
-  text-align: center;
+#itemDetails > section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
 }
 
-@media (max-width: 900px) {
-  #addNewItem {
-    display: grid;
-  }
-  #addNewItem > section {
-    display: grid;
-    grid-template-columns: 1fr !important;
-    gap: 20px;
-  }
-  #addNewItem label {
+
+@media (max-width: 500px) {
+  label {
     display: none;
   }
 }

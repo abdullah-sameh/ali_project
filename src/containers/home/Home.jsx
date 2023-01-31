@@ -15,7 +15,7 @@ const Home = () => {
       navigate("/");
     } else {
       //@ts-ignore
-      let item: string = sessionStorage.getItem("user");
+      let item = sessionStorage.getItem("user");
       dispatch(setUser(JSON.parse(item)));
     }
   }, []);
