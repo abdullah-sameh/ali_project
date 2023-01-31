@@ -61,7 +61,7 @@ button:hover {
   font-family: inherit;
   font-size: 14px;
 }
-:is(#typeCar_nameItem > button, #itemDetails button ) {
+:is(#typeCar_nameItem > button, #itemDetails button) {
   all: initial;
   padding: 15px;
   font-size: 22px;
@@ -83,7 +83,6 @@ button:hover {
   justify-content: space-between;
   gap: 20px;
 }
-
 
 @media (max-width: 500px) {
   label {

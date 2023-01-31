@@ -22,7 +22,7 @@
 body {
   background-color: var(--black);
   direction: rtl;
-  font-family: "Lemonada", cursive;
+  font-family: "Lemonada", cursive !important;
 }
 
 .container {

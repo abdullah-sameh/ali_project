@@ -1,37 +1,38 @@
-import React, { useEffect } from "react"
-import Navbar from "../../components/navBar/Navbar"
-import { useSelector } from "react-redux/es/hooks/useSelector"
-import { useNavigate } from "react-router"
-import { useDispatch } from "react-redux/es/exports"
+import React, { useEffect } from "react";
+import Navbar from "../../components/navBar/Navbar";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux/es/exports";
 
-import "./addProduct.css"
-import { setUser } from "../../rtk/slices/userSlice"
-import { useState } from "react"
+import "./addProduct.css";
+import { setUser } from "../../rtk/slices/userSlice";
+import { useState } from "react";
 
 const AddProduct = () => {
   // to check if he loggedin
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (!sessionStorage.getItem("user")) {
-      navigate("/")
+      navigate("/");
     } else {
       //@ts-ignore
-      let item = sessionStorage.getItem("user")
-      dispatch(setUser(JSON.parse(item)))
+      let item = sessionStorage.getItem("user");
+      dispatch(setUser(JSON.parse(item)));
     }
-  }, [])
+  }, []);
 
   //to get the user
-  const user = useSelector((state) => state.user)
+  const user = useSelector((state) => state.user);
 
-  const [firstForm, setFirstForm] = useState("")
-  const [secondForm, setSecondForm] = useState("")
-  const [styleFirstForm, setStyleFirstForm] = useState("grid")
-  const [styleSecForm, setStyleSecForm] = useState("none")
-  const [firstStep, setFirstStep] = useState('الخطوة الاولى')
-  const [secondStep, setSecondStep] = useState('الخطوة الثانية')
+  const [firstForm, setFirstForm] = useState("");
+  const [secondForm, setSecondForm] = useState("");
+  const [styleFirstForm, setStyleFirstForm] = useState("grid");
+  const [styleSecForm, setStyleSecForm] = useState("none");
+  const [firstStep, setFirstStep] = useState("الخطوة الاولى");
+  const [secondStep, setSecondStep] = useState("الخطوة الثانية");
+
   return (
     <>
       <Navbar />
@@ -47,7 +48,7 @@ const AddProduct = () => {
               className={"animate__animated " + firstForm}
               style={{ display: styleFirstForm }}
               onSubmit={(e) => {
-                e.preventDefault()
+                e.preventDefault();
               }}
             >
               <section id="typeCar">
@@ -75,13 +76,13 @@ const AddProduct = () => {
               <button
                 type="submit"
                 onClick={() => {
-                  setFirstForm("animate__backOutRight")
+                  setFirstForm("animate__backOutRight");
                   setTimeout(() => {
-                    setStyleFirstForm("none")
-                    setStyleSecForm("grid")
-                    setSecondForm("animate__backInLeft")
-                    setFirstStep("تم")
-                  }, 300)
+                    setStyleFirstForm("none");
+                    setStyleSecForm("grid");
+                    setSecondForm("animate__backInLeft");
+                    setFirstStep("تم");
+                  }, 300);
                 }}
               >
                 التالي
@@ -92,7 +93,7 @@ const AddProduct = () => {
               id="itemDetails"
               className={"animate__animated " + secondForm}
               onSubmit={(e) => {
-                e.preventDefault()
+                e.preventDefault();
               }}
               style={{ display: styleSecForm }}
             >
@@ -131,13 +132,13 @@ const AddProduct = () => {
               <section>
                 <button
                   onClick={() => {
-                    setSecondForm("animate__backOutLeft")
+                    setSecondForm("animate__backOutLeft");
                     setTimeout(() => {
-                      setStyleFirstForm("grid")
-                      setFirstForm("animate__backInRight")
-                      setStyleSecForm("none")
-                      setFirstStep('الخطوة الاولى')
-                    }, 300)
+                      setStyleFirstForm("grid");
+                      setFirstForm("animate__backInRight");
+                      setStyleSecForm("none");
+                      setFirstStep("الخطوة الاولى");
+                    }, 300);
                   }}
                 >
                   السابق
@@ -153,7 +154,7 @@ const AddProduct = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default AddProduct
+export default AddProduct;
