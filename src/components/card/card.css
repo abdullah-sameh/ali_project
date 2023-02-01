@@ -1,0 +1,67 @@
+.card {
+  background: #000;
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+.card > header {
+  all: initial;
+  display: grid;
+  align-content: space-between;
+  gap: 10px;
+  font-family: inherit;
+  color: var(--white);
+  padding: 10px;
+}
+.card > header > h2 {
+  font-size: 22px;
+}
+.card > header > div {
+  display: flex;
+  gap: 5px;
+  font-size: 12px;
+}
+.card > header > div > span {
+  background: var(--white);
+  color: var(--black);
+  padding: 0 5px;
+}
+.card > aside { 
+  grid-column: 2/3;
+  grid-row: 1/3;
+  display: grid;
+  justify-items: center;
+  align-content: space-between;
+  border-right: 1px solid #fff;
+  padding: 10px 0;
+}
+.card > aside > span {
+  background: var(--yellow);
+  color: var(--black);
+  padding: 0 10px;
+  cursor: pointer;
+}
+.card > aside > span:hover {
+  background-image: linear-gradient(rgb(0 0 0 / 0.2), rgb(0 0 0 / 0.2));
+}
+.card > aside > input {
+  all: initial;
+  background: var(--white);
+  padding: 0 5px;
+  margin: 10px;
+  width: 30px;
+  font-family: inherit;
+  text-align: center;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.card > footer {
+  border-top: 1px solid #fff;
+  align-self: end;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  color: var(--white);
+}
