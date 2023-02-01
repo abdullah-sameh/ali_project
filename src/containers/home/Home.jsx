@@ -1,39 +1,65 @@
-import { useNavigate } from "react-router"
-import Navbar from "../../components/navBar/Navbar"
-import { useDispatch, useSelector } from "react-redux/es/exports"
-import "./home.css"
-import { setUser } from "../../rtk/slices/userSlice"
-import { useEffect, useState } from "react"
-import { getAllCars } from "../../rtk/slices/allCarsSlice"
-import { Link } from "react-router-dom"
-import Card from "../../components/card/Card"
+import { useNavigate } from "react-router";
+import Navbar from "../../components/navBar/Navbar";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import "./home.css";
+import { setUser } from "../../rtk/slices/userSlice";
+import { useEffect, useState } from "react";
+import { getAllCars } from "../../rtk/slices/allCarsSlice";
+import { Link } from "react-router-dom";
+import Card from "../../components/card/Card";
+import { db } from "../../firebase";
+import { addDoc, collection } from "firebase/firestore";
+import Swal from "sweetalert2";
 
 const Home = () => {
   // to check if he loggedin
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const data = []
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const [formState, setFormState] = useState(false)
-  const [model, setModel] = useState("")
+  const [formState, setFormState] = useState(false);
+  const [model, setModel] = useState("");
 
-  const allCars = useSelector((state) => state.allCars)
-  const user = useSelector((state) => state.user)
+  const allCars = useSelector((state) => state.allCars);
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     if (!sessionStorage.getItem("user")) {
-      navigate("/")
+      navigate("/");
     } else {
-      let item = sessionStorage.getItem("user")
-      dispatch(setUser(JSON.parse(item)))
+      let item = sessionStorage.getItem("user");
+      dispatch(setUser(JSON.parse(item)));
     }
-    dispatch(getAllCars())
+    dispatch(getAllCars());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
-  const handleForm = (e) => {
-    e.preventDefault()
-  }
+  const handleForm = async (e) => {
+    e.preventDefault();
+    if (
+      allCars?.filter((car) => car.data()?.modelName === model).length === 0
+    ) {
+      await addDoc(collection(db, "models"), {
+        modelName: model,
+        spareParts: [],
+      }).then(() => {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `لقد تم اضافة ${model} بنجاح`,
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        setFormState(false);
+        dispatch(getAllCars());
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "عذرا",
+        text: "هذا الموديل موجود بالفعل",
+      });
+    }
+  };
 
   return (
     <>
@@ -77,7 +103,7 @@ const Home = () => {
         )}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
