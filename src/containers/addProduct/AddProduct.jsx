@@ -30,8 +30,6 @@ const AddProduct = () => {
   const [secondForm, setSecondForm] = useState("");
   const [styleFirstForm, setStyleFirstForm] = useState("grid");
   const [styleSecForm, setStyleSecForm] = useState("none");
-  const [firstStep, setFirstStep] = useState("الخطوة الاولى");
-  const [secondStep, setSecondStep] = useState("الخطوة الثانية");
 
   return (
     <>
@@ -39,8 +37,6 @@ const AddProduct = () => {
       {user.admin ? (
         <div className="container forms">
           <div className="absolute">
-            <p>{firstStep}</p>
-            <p>{secondStep}</p>
           </div>
           <div className="format">
             <form
@@ -81,7 +77,6 @@ const AddProduct = () => {
                     setStyleFirstForm("none");
                     setStyleSecForm("grid");
                     setSecondForm("animate__backInLeft");
-                    setFirstStep("تم");
                   }, 300);
                 }}
               >
@@ -137,7 +132,6 @@ const AddProduct = () => {
                       setStyleFirstForm("grid");
                       setFirstForm("animate__backInRight");
                       setStyleSecForm("none");
-                      setFirstStep("الخطوة الاولى");
                     }, 300);
                   }}
                 >
