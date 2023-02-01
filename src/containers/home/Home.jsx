@@ -1,18 +1,19 @@
-import { useNavigate } from "react-router"
-import Navbar from "../../components/navBar/Navbar"
-import { useDispatch, useSelector } from "react-redux/es/exports"
-import "./home.css"
-import { setUser } from "../../rtk/slices/userSlice"
-import { useEffect, useState } from "react"
-import { getAllCars } from "../../rtk/slices/allCarsSlice"
-import { Link } from "react-router-dom"
-import Card from "../../components/card/Card"
+import { useNavigate } from "react-router";
+import Navbar from "../../components/navBar/Navbar";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import "./home.css";
+import { setUser } from "../../rtk/slices/userSlice";
+import { useEffect, useState } from "react";
+import { getAllCars } from "../../rtk/slices/allCarsSlice";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { db } from "../../firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 const Home = () => {
   // to check if he loggedin
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const data = []
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const [formState, setFormState] = useState(false);
   const [model, setModel] = useState("");
@@ -93,7 +94,6 @@ const Home = () => {
           </div>
         )}
       </div>
-      
     </>
   );
 };
