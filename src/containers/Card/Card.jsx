@@ -4,30 +4,43 @@ import "./card.css"
 
 export default function Card(props) {
   const user = useSelector((state) => state.user)
-  const [numOrder, setNumOrder] = useState()
+  const [numOrder, setNumOrder] = useState("0")
+  const countrysMade = [1,2,3]
+
   return (
     <section className="card">
       <header>
         <h2>{props.nameItem}</h2>
-        <div>
-          <span>{props.typeCar}</span>
-          <span>{props.countryMade}</span>
-          <span>{props.numItems}</span>
+        <div className="types">
+          {countrysMade.map((item) => {
+            return (
+              <div className="type">
+                <span>{props.typeCar}</span>
+                <span>{props.countryMade}</span>
+                <span>{props.numItems}</span>
+              </div>
+            )
+          })}
         </div>
       </header>
       <aside>
         <span
           onClick={() => {
-            if (+props.numItems > +numOrder) setNumOrder(+numOrder + 1)
+            if (props.numItems > +numOrder) setNumOrder(+numOrder + 1)
           }}
         >
           +
         </span>
-        <input type="number" value={numOrder} onChange={e => {
-          if (+props.numItems >= e.target.value) setNumOrder(e.target.value)
-        }} />
+        <input
+          type="number"
+          value={numOrder}
+          onChange={(e) => {
+            if (props.numItems >= e.target.value) setNumOrder(e.target.value)
+          }}
+        />
         <span
           onClick={() => {
+            // eslint-disable-next-line eqeqeq
             if (numOrder != 0) setNumOrder(+numOrder - 1)
           }}
         >

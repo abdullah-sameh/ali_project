@@ -15,12 +15,17 @@
 .card > header > h2 {
   font-size: 22px;
 }
-.card > header > div {
+.card > header .types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 30px;
+}
+.card > header .type {
   display: flex;
   gap: 5px;
   font-size: 12px;
 }
-.card > header > div > span {
+.card > header .type > span {
   background: var(--white);
   color: var(--black);
   padding: 0 5px;
@@ -64,4 +69,7 @@ input[type="number"]::-webkit-outer-spin-button {
   justify-content: space-between;
   padding: 10px;
   color: var(--white);
+}
+.appear {
+  display: block;
 }

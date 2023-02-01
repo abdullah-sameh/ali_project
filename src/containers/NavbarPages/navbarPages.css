@@ -1,0 +1,20 @@
+.someLinks {
+  cursor: pointer;
+}
+.links {
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 5px;
+}
+.links > a {
+  all: initial;
+  cursor: pointer;
+  text-align: center;
+  font-family: inherit;
+  background: var(--white);
+  transition: 0.2s;
+}
+.links > a:hover {
+  background: var(--black);
+  color: var(--white);
+}
+

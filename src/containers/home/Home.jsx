@@ -6,13 +6,11 @@ import { setUser } from "../../rtk/slices/userSlice"
 import { useEffect, useState } from "react"
 import { getAllCars } from "../../rtk/slices/allCarsSlice"
 import { Link } from "react-router-dom"
-import Card from "../../components/card/Card"
 
 const Home = () => {
   // to check if he loggedin
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const data = []
 
   const [formState, setFormState] = useState(false)
   const [model, setModel] = useState("")
@@ -47,14 +45,6 @@ const Home = () => {
         {user.admin && (
           <button onClick={() => setFormState(true)}>أضف نوع جديد</button>
         )}
-        <Card
-          nameItem="اسم المنتج"
-          typeCar="لوجان"
-          countryMade="مصر"
-          numItems="50"
-          gomlaPrice="25"
-          sellPrice="50"
-        />
         {formState && (
           <div className="addContainer">
             <form onSubmit={(e) => handleForm(e)} className="addModel">
@@ -69,6 +59,7 @@ const Home = () => {
                 id="carModel"
                 type="text"
                 placeholder="مثلا: ميجان"
+                value={model}
                 required
               />
               <input type="submit" value="موافق" />
@@ -76,6 +67,7 @@ const Home = () => {
           </div>
         )}
       </div>
+      
     </>
   )
 }

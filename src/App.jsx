@@ -4,6 +4,7 @@ import "./App.css";
 import AddProduct from "./containers/addProduct/AddProduct";
 import Home from "./containers/home/Home";
 import Login from "./containers/login/Login";
+import CarTypePage from "./containers/CarTypePage/CarTypePage"
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <Route path="/" element={<Login />}></Route>
         <Route path="/home" element={<Home />}></Route>
         <Route path="/add" element={<AddProduct />}></Route>
-        <Route path="/cars/:carId" element={<AddProduct />}></Route>
+        <Route path="/cars/:carId" element={<CarTypePage />}></Route>
       </Routes>
     </div>
   );
