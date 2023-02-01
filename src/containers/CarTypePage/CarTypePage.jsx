@@ -1,13 +1,38 @@
-import Card from "../Card/Card"
-import NavbarPages from "../NavbarPages/NavbarPages"
-import "./CarTypePage.css"
-import { Link } from "react-router-dom"
+import Card from "../../components/Card/Card";
+import NavbarPages from "../../components/NavbarPages/NavbarPages";
+import "./CarTypePage.css";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getCar } from "../../rtk/slices/carSlice";
 
-export default function CarTypePage(props) {
-  const data = [1, 2, 3, 4, 5, 6, 7, 8]
+export default function CarTypePage() {
+  const dispatch = useDispatch();
+  const { carId } = useParams();
+  const theCar = useSelector((state) => state.car);
+
+  // theCar:{
+  // spareParts:[
+  //   {
+  //     name:'',
+  //     madeIn:[
+  //       {
+  //         availableNumber: 0,
+  //         gomlaNumber: 0,
+  //         customerNumber: 0,
+  //         country:''
+  //       },
+  //     ],
+  //   },
+  //  ],
+  // }
+
+  useEffect(() => {
+    dispatch(getCar(carId));
+  }, [carId]);
   return (
     <>
-      <NavbarPages name="هوبا" />
+      <NavbarPages name={theCar?.data?.modelName} />
       <form className="container search">
         <input type="search" id="search" />
         <label htmlFor="search">
@@ -15,17 +40,15 @@ export default function CarTypePage(props) {
         </label>
       </form>
       <div className="container cards">
-        {data.map((item) => {
+        {theCar?.data?.spareParts?.map((part, index) => {
+          console.log(part);
           return (
             <Card
-              nameItem="اسم المنتج"
-              typeCar="لوجان"
-              countryMade="مصر"
-              numItems="50"
-              gomlaPrice="25"
-              sellPrice="50"
+              key={index}
+              nameItem={part?.name}
+              countryMade={part?.madeIn}
             />
-          )
+          );
         })}
       </div>
       <Link className="request-btn" to={"./requestPage"}>
@@ -33,5 +56,5 @@ export default function CarTypePage(props) {
         <i className="material-icons">shopping_cart</i>
       </Link>
     </>
-  )
+  );
 }
