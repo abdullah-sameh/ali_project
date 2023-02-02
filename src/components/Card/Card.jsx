@@ -19,6 +19,7 @@ export default function Card({ nameItem, countryMade }) {
               setInfo(e.target.value)
             }}
           >
+            <option value="">الصناعة</option>
             {countryMade.map((country, index) => {
               return (
                 <option value={JSON.stringify(country)}>

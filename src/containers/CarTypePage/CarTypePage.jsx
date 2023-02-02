@@ -65,7 +65,7 @@ export default function CarTypePage() {
           )
         })}
       </div>
-      <Link className="request-btn" to={"./requestPage"}>
+      <Link className="request-btn" to={"./RequestPage"}>
         <p>اكد الطلب</p>
         <i className="material-icons">shopping_cart</i>
       </Link>
