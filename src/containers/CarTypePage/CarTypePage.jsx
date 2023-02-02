@@ -4,12 +4,12 @@ import "./CarTypePage.css";
 import { Link, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getCar } from "../../rtk/slices/carSlice";
+import { getCarById } from "../../rtk/slices/carIdSlice";
 
 export default function CarTypePage() {
   const dispatch = useDispatch();
   const { carId } = useParams();
-  const theCar = useSelector((state) => state.car);
+  const theCar = useSelector((state) => state.carById);
 
   // theCar:{
   // spareParts:[
@@ -28,7 +28,7 @@ export default function CarTypePage() {
   // }
 
   useEffect(() => {
-    dispatch(getCar(carId));
+    dispatch(getCarById(carId));
   }, [carId]);
   return (
     <>
@@ -41,7 +41,6 @@ export default function CarTypePage() {
       </form>
       <div className="container cards">
         {theCar?.data?.spareParts?.map((part, index) => {
-          console.log(part);
           return (
             <Card
               key={index}
