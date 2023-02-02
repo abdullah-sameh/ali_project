@@ -11,25 +11,10 @@ export default function CarTypePage() {
   const { carId } = useParams();
   const theCar = useSelector((state) => state.carById);
 
-  // theCar:{
-  // spareParts:[
-  //   {
-  //     name:'',
-  //     madeIn:[
-  //       {
-  //         availableNumber: 0,
-  //         gomlaNumber: 0,
-  //         customerNumber: 0,
-  //         country:''
-  //       },
-  //     ],
-  //   },
-  //  ],
-  // }
-
   useEffect(() => {
     dispatch(getCarById(carId));
   }, [carId]);
+
   return (
     <>
       <NavbarPages name={theCar?.data?.modelName} />

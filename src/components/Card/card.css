@@ -17,18 +17,18 @@
 }
 .card > header .types {
   display: flex;
-  flex-wrap: wrap;
-  gap: 10px 30px;
-}
-.card > header .type {
-  display: flex;
   gap: 5px;
   font-size: 12px;
 }
-.card > header .type > span {
+.card > header .types > select {
+  font-family: inherit;
+}
+.card > header .types > span {
   background: var(--white);
   color: var(--black);
   padding: 0 5px;
+  display: flex;
+  place-items: center;
 }
 .card > aside { 
   grid-column: 2/3;
