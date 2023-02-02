@@ -1,12 +1,12 @@
-import { useState } from "react"
-import { useSelector } from "react-redux/es/exports"
-import "./card.css"
+import { useState } from "react";
+import { useSelector } from "react-redux/es/exports";
+import "./card.css";
 
 export default function Card({ nameItem, countryMade }) {
-  const user = useSelector((state) => state.user)
-  const [numOrder, setNumOrder] = useState("0")
+  const user = useSelector((state) => state.user);
+  const [numOrder, setNumOrder] = useState("0");
 
-  const [info, setInfo] = useState("")
+  const [info, setInfo] = useState("");
   return (
     <section className="card">
       <header>
@@ -16,16 +16,16 @@ export default function Card({ nameItem, countryMade }) {
           <select
             id="country"
             onChange={(e) => {
-              setInfo(e.target.value)
+              setInfo(e.target.value);
             }}
           >
             <option value="">الصناعة</option>
             {countryMade.map((country, index) => {
               return (
-                <option value={JSON.stringify(country)}>
+                <option key={index} value={JSON.stringify(country)}>
                   {country.country}
                 </option>
-              )
+              );
             })}
           </select>
           <span>{info ? JSON.parse(info).availableNumber : ""}</span>
@@ -35,7 +35,7 @@ export default function Card({ nameItem, countryMade }) {
         <span
           onClick={() => {
             if (JSON.parse(info).availableNumber > +numOrder)
-              setNumOrder(+numOrder + 1)
+              setNumOrder(+numOrder + 1);
           }}
         >
           +
@@ -45,13 +45,13 @@ export default function Card({ nameItem, countryMade }) {
           value={numOrder}
           onChange={(e) => {
             if (JSON.parse(info).availableNumber >= e.target.value)
-              setNumOrder(e.target.value)
+              setNumOrder(e.target.value);
           }}
         />
         <span
           onClick={() => {
             // eslint-disable-next-line eqeqeq
-            if (numOrder != 0) setNumOrder(+numOrder - 1)
+            if (numOrder != 0) setNumOrder(+numOrder - 1);
           }}
         >
           -
@@ -64,5 +64,5 @@ export default function Card({ nameItem, countryMade }) {
         <span>البيع: {info ? JSON.parse(info).customerPrice : ""} جنية</span>
       </footer>
     </section>
-  )
+  );
 }

@@ -82,6 +82,13 @@ button:hover {
   display: flex;
   justify-content: space-between;
   gap: 20px;
+  position: relative;
+}
+
+#itemDetails > section h5 {
+  position: absolute;
+  left: -40px;
+  color: white;
 }
 
 @media (max-width: 500px) {

@@ -37,19 +37,31 @@ const Home = () => {
     if (
       allCars?.filter((car) => car.data()?.modelName === model).length === 0
     ) {
-      await addDoc(collection(db, "models"), {
-        modelName: model,
-        spareParts: [],
-      }).then(() => {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: `لقد تم اضافة ${model} بنجاح`,
-          showConfirmButton: false,
-          timer: 2000,
-        });
-        setFormState(false);
-        dispatch(getAllCars());
+      Swal.fire({
+        title: "هل أنت متأكد",
+        text: `من اضافة ${model}`,
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        cancelButtontext: "لا",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          await addDoc(collection(db, "models"), {
+            modelName: model,
+            spareParts: [],
+          }).then(() => {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `لقد تم اضافة ${model} بنجاح`,
+              showConfirmButton: false,
+              timer: 2000,
+            });
+            setFormState(false);
+            dispatch(getAllCars());
+          });
+        }
       });
     } else {
       Swal.fire({
