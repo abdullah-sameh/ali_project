@@ -61,7 +61,7 @@ export default function Card({ nameItem, countryMade }) {
         {user.admin && (
           <span>الجملة: {info ? JSON.parse(info).gomlaPrice : ""} جنية</span>
         )}
-        <span>البيع: {info ? JSON.parse(info).customerPrice : ""} جنية</span>
+        <span>السعر: {info ? JSON.parse(info).customerPrice : ""} جنية</span>
       </footer>
     </section>
   );
