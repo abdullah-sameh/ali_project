@@ -22,7 +22,7 @@ export default function CarTypePage() {
     return searchResult?.map((part, index) => (
       <Card key={index} nameItem={part?.name} countryMade={part?.madeIn} />
     ));
-  }, [spareParts]);
+  }, [searchResult]);
 
   const searchHandler = (value) => {
     if (value.trim() !== "") {
