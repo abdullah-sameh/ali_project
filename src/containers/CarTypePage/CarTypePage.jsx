@@ -5,42 +5,35 @@ import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { getCarById } from "../../rtk/slices/carIdSlice";
-import { resetCart } from "../../rtk/slices/sellPartsSlice";
 
 export default function CarTypePage() {
   const dispatch = useDispatch();
   const { carId } = useParams();
   const theCar = useSelector((state) => state.carById);
   const [spareParts, setSpareParts] = useState([]);
+  const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
     dispatch(getCarById(carId));
     setSpareParts(theCar?.data?.spareParts);
-    dispatch(resetCart());
   }, [carId, theCar]);
 
-  const displayParts = useMemo(
-    () =>
-      spareParts?.map((part, index) => (
-        <Card key={index} nameItem={part?.name} countryMade={part?.madeIn} />
-      )),
-    [spareParts]
-  );
+  const displayParts = useMemo(() => {
+    return searchResult?.map((part, index) => (
+      <Card key={index} nameItem={part?.name} countryMade={part?.madeIn} />
+    ));
+  }, [spareParts]);
 
   const searchHandler = (value) => {
     if (value.trim() !== "") {
       let currentSpareParts = spareParts?.filter((part) =>
         part?.name.includes(value.trim())
       );
-      console.log(currentSpareParts);
-      setSpareParts(currentSpareParts);
+      setSearchResult(currentSpareParts);
     } else if (value.trim() === "") {
-      setSpareParts(theCar?.data?.spareParts);
+      let currentParts = spareParts;
+      setSearchResult(currentParts);
     }
-  };
-
-  const completeOrder = () => {
-    console.log(theCar);
   };
 
   return (
