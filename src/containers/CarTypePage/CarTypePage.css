@@ -29,7 +29,7 @@
   }
 }
 /* for request page */
-.request-btn {
+/* .request-btn {
   all: initial;
   font-family: inherit;
   font-size: 1.2em;
@@ -50,4 +50,4 @@
 .request-btn:hover {
   background: var(--yellow);
   color: var(--white);
-}
+} */

@@ -1,12 +1,77 @@
-import { useState } from "react";
-import { useSelector } from "react-redux/es/exports";
+import { doc, setDoc } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import Swal from "sweetalert2";
+import { db } from "../../firebase";
+import { getCarById } from "../../rtk/slices/carIdSlice";
 import "./card.css";
 
 export default function Card({ nameItem, countryMade }) {
   const user = useSelector((state) => state.user);
-  const [numOrder, setNumOrder] = useState("0");
+  const [numOrder, setNumOrder] = useState(0);
+  const [info, setInfo] = useState({});
+  const theCar = useSelector((state) => state?.carById);
+  const dispatch = useDispatch();
 
-  const [info, setInfo] = useState("");
+  useEffect(() => {
+    setInfo(
+      ...countryMade?.filter((country) => country?.country === info?.country)
+    );
+  }, [countryMade]);
+
+  const orderHandler = async () => {
+    if (info && numOrder !== 0) {
+      let [oldStateOfNewPart] = theCar?.data?.spareParts?.filter(
+        (part) => part?.name === nameItem
+      );
+
+      let newPartCountry = {
+        name: nameItem,
+        madeIn: [
+          ...oldStateOfNewPart?.madeIn?.filter(
+            (countryDetails) => countryDetails?.country !== info?.country
+          ),
+          {
+            country: info?.country,
+            availableNumber: info?.availableNumber - numOrder,
+            gomlaPrice: info?.gomlaPrice,
+            customerPrice: info?.customerPrice,
+          },
+        ],
+      };
+
+      let newCarDetails = {
+        modelName: theCar?.data?.modelName,
+        spareParts: [
+          ...theCar?.data?.spareParts?.filter(
+            (part) => part?.name !== nameItem
+          ),
+          newPartCountry,
+        ],
+      };
+
+      await setDoc(doc(db, "models", theCar.id), newCarDetails)
+        .then(() => {
+          setNumOrder(0);
+          dispatch(getCarById(theCar.id));
+        })
+        .catch((e) => {
+          console.log(e);
+          Swal.fire({
+            icon: "error",
+            title: "خطأ",
+            text: "حاول مرة أخرى!",
+          });
+        });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "خطأ",
+        text: "يرجى اختيرا الصناعة و العدد",
+      });
+    }
+  };
+
   return (
     <section className="card">
       <header>
@@ -16,52 +81,42 @@ export default function Card({ nameItem, countryMade }) {
           <select
             id="country"
             onChange={(e) => {
-              setInfo(e.target.value);
+              setInfo(
+                ...countryMade?.filter(
+                  (country) => country?.country === e.currentTarget.value
+                )
+              );
             }}
           >
             <option value="">الصناعة</option>
-            {countryMade.map((country, index) => {
+            {countryMade?.map((country, index) => {
               return (
-                <option key={index} value={JSON.stringify(country)}>
+                <option key={index} value={country.country}>
                   {country.country}
                 </option>
               );
             })}
           </select>
-          <span>{info ? JSON.parse(info).availableNumber : ""}</span>
+          <span>{info?.availableNumber}</span>
         </div>
       </header>
       <aside>
-        <span
-          onClick={() => {
-            if (JSON.parse(info).availableNumber > +numOrder)
-              setNumOrder(+numOrder + 1);
-          }}
-        >
-          +
-        </span>
         <input
           type="number"
-          value={numOrder}
+          className="neededNumber"
+          min={0}
           onChange={(e) => {
-            if (JSON.parse(info).availableNumber >= e.target.value)
+            if (info.availableNumber >= e.target.value) {
               setNumOrder(e.target.value);
+            }
           }}
+          value={numOrder}
         />
-        <span
-          onClick={() => {
-            // eslint-disable-next-line eqeqeq
-            if (numOrder != 0) setNumOrder(+numOrder - 1);
-          }}
-        >
-          -
-        </span>
+        <span onClick={orderHandler}>إضافة</span>
       </aside>
       <footer>
-        {user.admin && (
-          <span>الجملة: {info ? JSON.parse(info).gomlaPrice : ""} جنية</span>
-        )}
-        <span>السعر: {info ? JSON.parse(info).customerPrice : ""} جنية</span>
+        {user.admin && <span>الجملة: {info ? info.gomlaPrice : ""} جنية</span>}
+        <span>السعر: {info?.customerPrice} جنية</span>
       </footer>
     </section>
   );

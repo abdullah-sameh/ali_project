@@ -1,30 +1,31 @@
 import Card from "../../components/Card/Card";
 import NavbarPages from "../../components/NavbarPages/NavbarPages";
 import "./CarTypePage.css";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { getCarById } from "../../rtk/slices/carIdSlice";
+import { resetCart } from "../../rtk/slices/sellPartsSlice";
 
 export default function CarTypePage() {
   const dispatch = useDispatch();
   const { carId } = useParams();
   const theCar = useSelector((state) => state.carById);
-  const [spareParts, setSpareParts] = useState(theCar?.data?.spareParts);
+  const [spareParts, setSpareParts] = useState([]);
 
   useEffect(() => {
     dispatch(getCarById(carId));
     setSpareParts(theCar?.data?.spareParts);
-  }, []);
+    dispatch(resetCart());
+  }, [carId, theCar]);
 
-  const displayParts = useMemo(() => {
-    return spareParts?.map((part, index) => {
-      console.log(spareParts);
-      return (
+  const displayParts = useMemo(
+    () =>
+      spareParts?.map((part, index) => (
         <Card key={index} nameItem={part?.name} countryMade={part?.madeIn} />
-      );
-    });
-  }, [spareParts]);
+      )),
+    [spareParts]
+  );
 
   const searchHandler = (value) => {
     if (value.trim() !== "") {
@@ -36,6 +37,10 @@ export default function CarTypePage() {
     } else if (value.trim() === "") {
       setSpareParts(theCar?.data?.spareParts);
     }
+  };
+
+  const completeOrder = () => {
+    console.log(theCar);
   };
 
   return (
@@ -52,10 +57,10 @@ export default function CarTypePage() {
         </label>
       </form>
       <div className="container cards">{displayParts}</div>
-      <Link className="request-btn" to={"./RequestPage"}>
+      {/* <button className="request-btn" onClick={completeOrder}>
         <p>اكد الطلب</p>
         <i className="material-icons">shopping_cart</i>
-      </Link>
+      </button> */}
     </>
   );
 }
