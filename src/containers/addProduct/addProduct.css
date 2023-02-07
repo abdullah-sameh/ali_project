@@ -96,3 +96,8 @@ button:hover {
     display: none;
   }
 }
+
+.container .permission {
+  color: white;
+  text-align: center;
+}
