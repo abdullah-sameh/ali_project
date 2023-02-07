@@ -32,6 +32,7 @@ const AddProduct = () => {
   const [partCountryDetails, setPartCountryDetails] = useState({});
 
   //second form states
+  // const [, setAvailableNumber] = useState('');
   const [availableNumber, setAvailableNumber] = useState(0);
   const [gomlaPrice, setGomlaPrice] = useState(0);
   const [customerPrice, setCustomerPrice] = useState(0);
@@ -146,7 +147,7 @@ const AddProduct = () => {
               className={"animate__animated " + firstForm}
               style={{ display: styleFirstForm }}
               onSubmit={(e) => {
-                firstFormHandler(e);
+                firstFormHandler(e)
               }}
             >
               <section id="typeCar">
@@ -185,7 +186,7 @@ const AddProduct = () => {
               id="itemDetails"
               className={"animate__animated " + secondForm}
               onSubmit={(e) => {
-                sendData(e);
+                sendData(e)
               }}
               style={{ display: styleSecForm }}
             >
@@ -202,10 +203,16 @@ const AddProduct = () => {
                   <option value="فرنساوى">فرنساوى</option>
                   <option value="تركي">تركي</option>
                   <option value="صينى">صينى</option>
+                  <option value="ايطالي">ايطالي</option>
+                  <option value="الماني">الماني</option>
+                  <option value="اسباني">اسباني</option>
+                  <option value="برازيلي">برازيلي</option>
                   <option value="تايوانى">تايوانى</option>
+                  <option value="كوري">كوري</option>
+                  <option value="مغربي">مغربي</option>
+                  <option value="فاليو">فاليو</option>
                 </select>
               </section>
-
               <section>
                 <label htmlFor="numItem">عدد القطعه</label>
                 <input
@@ -258,12 +265,12 @@ const AddProduct = () => {
               <section>
                 <button
                   onClick={() => {
-                    setSecondForm("animate__backOutLeft");
+                    setSecondForm("animate__backOutLeft")
                     setTimeout(() => {
-                      setStyleFirstForm("grid");
-                      setFirstForm("animate__backInRight");
-                      setStyleSecForm("none");
-                    }, 300);
+                      setStyleFirstForm("grid")
+                      setFirstForm("animate__backInRight")
+                      setStyleSecForm("none")
+                    }, 300)
                   }}
                 >
                   السابق
@@ -279,7 +286,7 @@ const AddProduct = () => {
         </div>
       )}
     </>
-  );
+  )
 };
 
 export default AddProduct;

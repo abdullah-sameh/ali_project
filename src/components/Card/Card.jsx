@@ -112,7 +112,7 @@ export default function Card({ nameItem, countryMade }) {
           }}
           value={numOrder}
         />
-        <span onClick={orderHandler}>إضافة</span>
+        <span onClick={orderHandler}>سحب</span>
       </aside>
       <footer>
         {user.admin && <span>الجملة: {info ? info.gomlaPrice : ""} جنية</span>}
