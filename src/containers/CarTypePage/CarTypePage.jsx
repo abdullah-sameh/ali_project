@@ -39,16 +39,10 @@ export default function CarTypePage() {
 
   const itemsPerPage = 10;
   const contentPage = [];
-  const [numPages, setNumPages] = useState(0);
+  const [numPages, setNumPages] = useState(1);
   const [currentPage, setCurrentPage] = useState(1);
 
-  function paginate(
-    content,
-    itemsPerPage,
-    currentPage,
-    setNumPages,
-    contentPage
-  ) {
+  function paginate(content, itemsPerPage, currentPage, contentPage) {
     if (content) {
       setNumPages(Math.ceil((content?.length - itemsPerPage) / itemsPerPage));
       const endIndex = currentPage * itemsPerPage;
@@ -63,23 +57,11 @@ export default function CarTypePage() {
 
   const displayParts = useMemo(() => {
     if (searchResult?.length === 0) {
-      return paginate(
-        spareParts,
-        itemsPerPage,
-        currentPage,
-        setNumPages,
-        contentPage
-      );
+      return paginate(spareParts, itemsPerPage, currentPage, contentPage);
     } else {
-      return paginate(
-        searchResult,
-        itemsPerPage,
-        currentPage,
-        setNumPages,
-        contentPage
-      );
+      return paginate(searchResult, itemsPerPage, currentPage, contentPage);
     }
-  }, [searchResult, currentPage]);
+  }, [searchResult, currentPage, carId]);
 
   const searchHandler = (value) => {
     if (value.trim() !== "") {
@@ -92,6 +74,7 @@ export default function CarTypePage() {
       setSearchResult(currentParts);
     }
   };
+
   return (
     <>
       <NavbarPages name={theCar?.data?.modelName} />

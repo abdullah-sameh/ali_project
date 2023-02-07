@@ -67,7 +67,7 @@ export default function Card({ nameItem, countryMade }) {
       Swal.fire({
         icon: "error",
         title: "خطأ",
-        text: "يرجى اختيرا الصناعة و العدد",
+        text: "يرجى اختيار الصناعة و العدد",
       });
     }
   };
