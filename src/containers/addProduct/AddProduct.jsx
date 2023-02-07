@@ -133,8 +133,6 @@ const AddProduct = () => {
       });
       dispatch(getCarByName(theCar?.data?.modelName));
       document.querySelector(".form2").reset();
-
-      // navigate("/home");
     });
   };
 
