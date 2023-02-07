@@ -32,7 +32,6 @@ const AddProduct = () => {
   const [partCountryDetails, setPartCountryDetails] = useState({});
 
   //second form states
-  // const [, setAvailableNumber] = useState('');
   const [availableNumber, setAvailableNumber] = useState(0);
   const [gomlaPrice, setGomlaPrice] = useState(0);
   const [customerPrice, setCustomerPrice] = useState(0);
@@ -98,6 +97,7 @@ const AddProduct = () => {
     );
 
     let oldCountryDetails = [];
+
     if (currentPart) {
       oldCountryDetails = currentPart?.madeIn?.filter(
         (countryDetails) =>
@@ -131,7 +131,10 @@ const AddProduct = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      navigate("/home");
+      dispatch(getCarByName(theCar?.data?.modelName));
+      document.querySelector(".form2").reset();
+
+      // navigate("/home");
     });
   };
 
@@ -147,7 +150,7 @@ const AddProduct = () => {
               className={"animate__animated " + firstForm}
               style={{ display: styleFirstForm }}
               onSubmit={(e) => {
-                firstFormHandler(e)
+                firstFormHandler(e);
               }}
             >
               <section id="typeCar">
@@ -184,9 +187,9 @@ const AddProduct = () => {
 
             <form
               id="itemDetails"
-              className={"animate__animated " + secondForm}
+              className={"animate__animated " + secondForm + " form2"}
               onSubmit={(e) => {
-                sendData(e)
+                sendData(e);
               }}
               style={{ display: styleSecForm }}
             >
@@ -265,12 +268,12 @@ const AddProduct = () => {
               <section>
                 <button
                   onClick={() => {
-                    setSecondForm("animate__backOutLeft")
+                    setSecondForm("animate__backOutLeft");
                     setTimeout(() => {
-                      setStyleFirstForm("grid")
-                      setFirstForm("animate__backInRight")
-                      setStyleSecForm("none")
-                    }, 300)
+                      setStyleFirstForm("grid");
+                      setFirstForm("animate__backInRight");
+                      setStyleSecForm("none");
+                    }, 300);
                   }}
                 >
                   السابق
@@ -286,7 +289,7 @@ const AddProduct = () => {
         </div>
       )}
     </>
-  )
+  );
 };
 
 export default AddProduct;
