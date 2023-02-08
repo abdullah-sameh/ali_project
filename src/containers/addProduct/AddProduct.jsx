@@ -1,12 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Navbar from "../../components/navBar/Navbar";
 import { useSelector } from "react-redux/es/hooks/useSelector";
-import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux/es/exports";
 import "./addProduct.css";
-import { setUser } from "../../rtk/slices/userSlice";
 import { useState } from "react";
-import { getAllCars } from "../../rtk/slices/allCarsSlice";
 import { getCarByName } from "../../rtk/slices/carNameSlice";
 import { db } from "../../firebase";
 import { setDoc, doc } from "firebase/firestore";
@@ -14,7 +11,6 @@ import Swal from "sweetalert2";
 
 const AddProduct = () => {
   // to check if he loggedin
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   //to get the user
@@ -35,18 +31,6 @@ const AddProduct = () => {
   const [availableNumber, setAvailableNumber] = useState(0);
   const [gomlaPrice, setGomlaPrice] = useState(0);
   const [customerPrice, setCustomerPrice] = useState(0);
-
-  useEffect(() => {
-    if (!sessionStorage.getItem("user")) {
-      navigate("/");
-    } else {
-      let item = sessionStorage.getItem("user");
-      dispatch(setUser(JSON.parse(item)));
-    }
-
-    dispatch(getAllCars());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const firstFormHandler = (e) => {
     e.preventDefault();
