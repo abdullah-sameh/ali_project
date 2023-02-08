@@ -6,7 +6,7 @@ import { db } from "../../firebase";
 import { getCarById } from "../../rtk/slices/carIdSlice";
 import "./card.css";
 
-export default function Card({ nameItem, countryMade }) {
+export default function Card({ nameItem, countryMade, carName }) {
   const user = useSelector((state) => state.user);
   const [numOrder, setNumOrder] = useState(0);
   const [info, setInfo] = useState({});
@@ -77,7 +77,7 @@ export default function Card({ nameItem, countryMade }) {
       <header>
         <h2>{nameItem}</h2>
         <div className="types">
-          <span>نوع العربية</span>
+          <span>{carName}</span>
           <select
             id="country"
             onChange={(e) => {

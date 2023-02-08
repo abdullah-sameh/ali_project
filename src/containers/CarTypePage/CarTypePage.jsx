@@ -56,7 +56,12 @@ export default function CarTypePage() {
         content[i] && contentPage.push(content[i])
       }
       return contentPage.map((ele, i) => (
-        <Card key={i} nameItem={ele.name} countryMade={ele.madeIn} />
+        <Card
+          key={i}
+          nameItem={ele.name}
+          countryMade={ele.madeIn}
+          carName={theCar?.data?.modelName}
+        />
       ))
     }
   }
@@ -104,7 +109,7 @@ export default function CarTypePage() {
       </form>
       <div className="container cards">{displayParts}</div>
       <div className="container">
-        {displayParts ? (
+        {displayParts && displayParts.length !== 0 ? (
           <nav className="pagination">
             <span
               key={1}
@@ -126,7 +131,7 @@ export default function CarTypePage() {
             ))}
           </nav>
         ) : (
-          <p> there's no somthing</p>
+          <h2 className="no-parts">لا يوجد قطع</h2>
         )}
       </div>
     </>
