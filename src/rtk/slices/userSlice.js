@@ -7,8 +7,8 @@ export const userSlice = createSlice({
     setUser: (state, action) => {
       let theUser = action.payload;
       if (
-        theUser.uid === "IkCyW6WUCjZFRWphnGjVKHvngSY2" ||
-        theUser.uid === "mWEUNIgvo9XBIChzYdtmLNsrGKG2"
+        theUser.uid === process.env.REACT_APP_FIRST_ADMIN ||
+        theUser.uid === process.env.REACT_APP_SECOND_ADMIN
       ) {
         return { ...theUser, admin: true };
       } else {

@@ -11,7 +11,7 @@ const Navbar = () => {
     <header>
       <nav className="container">
         <section className="left">
-          <Link to="/home">
+          <Link to="/">
             <img src={logo} alt="logo" />
           </Link>
         </section>

@@ -25,7 +25,7 @@ const Login = () => {
       .then((userCred) => {
         sessionStorage.setItem("user", JSON.stringify(userCred?.user));
         dispatch(setUser(userCred?.user));
-        navigate("/home");
+        navigate("/");
       })
       .catch((existError) => {
         console.log(existError);

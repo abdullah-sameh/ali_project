@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router";
+import { Route, Routes, useNavigate } from "react-router";
 import Navbar from "../../components/navBar/Navbar";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import "./home.css";
@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { db } from "../../firebase";
 import { collection, addDoc } from "firebase/firestore";
+import AddProduct from "../addProduct/AddProduct";
+import CarTypePage from "../CarTypePage/CarTypePage";
 
 const Home = () => {
   // to check if he loggedin
@@ -23,7 +25,7 @@ const Home = () => {
 
   useEffect(() => {
     if (!sessionStorage.getItem("user")) {
-      navigate("/");
+      navigate("/login");
     } else {
       let item = sessionStorage.getItem("user");
       dispatch(setUser(JSON.parse(item)));
@@ -74,38 +76,51 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
-      <div className="carsType container">
-        {allCars.map((car) => (
-          <Link key={car.id} to={`/cars/${car.id}`}>
-            {car.data().modelName}
-          </Link>
-        ))}
-        {user.admin && (
-          <button onClick={() => setFormState(true)}>أضف نوع جديد</button>
-        )}
-        {formState && (
-          <div className="addContainer">
-            <form onSubmit={(e) => handleForm(e)} className="addModel">
-              <h3 onClick={() => setFormState(false)} className="close">
-                X
-              </h3>
-              <label htmlFor="carModel">
-                <h1>أدخل موديل العربية</h1>
-              </label>
-              <input
-                onChange={(e) => setModel(e.currentTarget.value)}
-                id="carModel"
-                type="text"
-                placeholder="مثلا: ميجان"
-                value={model}
-                required
-              />
-              <input type="submit" value="موافق" />
-            </form>
-          </div>
-        )}
-      </div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Navbar />
+              <div className="carsType container">
+                {allCars.map((car) => (
+                  <Link key={car.id} to={`/cars/${car.id}`}>
+                    {car.data().modelName}
+                  </Link>
+                ))}
+                {user.admin && (
+                  <button onClick={() => setFormState(true)}>
+                    أضف نوع جديد
+                  </button>
+                )}
+                {formState && (
+                  <div className="addContainer">
+                    <form onSubmit={(e) => handleForm(e)} className="addModel">
+                      <h3 onClick={() => setFormState(false)} className="close">
+                        X
+                      </h3>
+                      <label htmlFor="carModel">
+                        <h1>أدخل موديل العربية</h1>
+                      </label>
+                      <input
+                        onChange={(e) => setModel(e.currentTarget.value)}
+                        id="carModel"
+                        type="text"
+                        placeholder="مثلا: ميجان"
+                        value={model}
+                        required
+                      />
+                      <input type="submit" value="موافق" />
+                    </form>
+                  </div>
+                )}
+              </div>
+            </>
+          }
+        ></Route>
+        <Route path="/add" element={<AddProduct />}></Route>
+        <Route path="/cars/:carId" element={<CarTypePage />}></Route>
+      </Routes>
     </>
   );
 };

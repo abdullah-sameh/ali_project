@@ -1,58 +1,38 @@
-import Card from "../../components/Card/Card"
-import NavbarPages from "../../components/NavbarPages/NavbarPages"
-import "./CarTypePage.css"
-import { useNavigate, useParams } from "react-router-dom"
-import { useDispatch, useSelector } from "react-redux"
-import { useEffect, useMemo, useState } from "react"
-import { getCarById } from "../../rtk/slices/carIdSlice"
-import { setUser } from "../../rtk/slices/userSlice"
-import { getAllCars } from "../../rtk/slices/allCarsSlice"
+import Card from "../../components/Card/Card";
+import NavbarPages from "../../components/NavbarPages/NavbarPages";
+import "./CarTypePage.css";
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
+import { getCarById } from "../../rtk/slices/carIdSlice";
 
 export default function CarTypePage() {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
 
-  const { carId } = useParams()
-  const theCar = useSelector((state) => state.carById)
-  const [spareParts, setSpareParts] = useState([])
-  const [searchResult, setSearchResult] = useState()
-
-  useEffect(() => {
-    if (!sessionStorage.getItem("user")) {
-      navigate("/")
-    } else {
-      let item = sessionStorage.getItem("user")
-      dispatch(setUser(JSON.parse(item)))
-    }
-    dispatch(getAllCars())
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const { carId } = useParams();
+  const theCar = useSelector((state) => state.carById);
+  const [spareParts, setSpareParts] = useState([]);
+  const [searchResult, setSearchResult] = useState();
 
   useEffect(() => {
-    dispatch(getCarById(carId))
-  }, [carId, dispatch])
+    dispatch(getCarById(carId));
+  }, [carId, dispatch]);
 
   useEffect(() => {
-    setSpareParts(theCar?.data?.spareParts)
-    setSearchResult([])
-  }, [theCar])
+    setSpareParts(theCar?.data?.spareParts);
+    setSearchResult([]);
+  }, [theCar]);
 
-  const itemsPerPage = 10
-  const contentPage = []
-  const [numPages, setNumPages] = useState(0)
-  const [currentPage, setCurrentPage] = useState(1)
+  const itemsPerPage = 10;
+  const contentPage = [];
+  const [numPages, setNumPages] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  function paginate(
-    content,
-    itemsPerPage,
-    currentPage,
-    setNumPages,
-    contentPage
-  ) {
+  function paginate(content, itemsPerPage, currentPage, contentPage) {
     if (content) {
       setNumPages(Math.ceil((content?.length - itemsPerPage) / itemsPerPage))
       const endIndex = currentPage * itemsPerPage
-      for (let i = endIndex - itemsPerPage; i < endIndex; i++) {
+      for (let i = endIndex - itemsPerPage;i < endIndex;i++) {
         content[i] && contentPage.push(content[i])
       }
       return contentPage.map((ele, i) => (
@@ -68,35 +48,24 @@ export default function CarTypePage() {
 
   const displayParts = useMemo(() => {
     if (searchResult?.length === 0) {
-      return paginate(
-        spareParts,
-        itemsPerPage,
-        currentPage,
-        setNumPages,
-        contentPage
-      )
+      return paginate(spareParts, itemsPerPage, currentPage, contentPage);
     } else {
-      return paginate(
-        searchResult,
-        itemsPerPage,
-        currentPage,
-        setNumPages,
-        contentPage
-      )
+      return paginate(searchResult, itemsPerPage, currentPage, contentPage);
     }
-  }, [searchResult, currentPage])
+  }, [searchResult, currentPage, carId]);
 
   const searchHandler = (value) => {
     if (value.trim() !== "") {
       let currentSpareParts = spareParts?.filter((part) =>
         part?.name.includes(value.trim())
-      )
-      setSearchResult(currentSpareParts)
+      );
+      setSearchResult(currentSpareParts);
     } else if (value.trim() === "") {
-      let currentParts = spareParts
-      setSearchResult(currentParts)
+      let currentParts = spareParts;
+      setSearchResult(currentParts);
     }
-  }
+  };
+
   return (
     <>
       <NavbarPages name={theCar?.data?.modelName} />
@@ -114,7 +83,7 @@ export default function CarTypePage() {
             <span
               key={1}
               onClick={() => {
-                setCurrentPage(1)
+                setCurrentPage(1);
               }}
             >
               1
@@ -123,7 +92,7 @@ export default function CarTypePage() {
               <span
                 key={i + 2}
                 onClick={(e) => {
-                  setCurrentPage(i + 2)
+                  setCurrentPage(i + 2);
                 }}
               >
                 {i + 2}
@@ -135,5 +104,5 @@ export default function CarTypePage() {
         )}
       </div>
     </>
-  )
+  );
 }

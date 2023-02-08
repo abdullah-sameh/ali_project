@@ -23,6 +23,11 @@
     grid-template-columns: 1fr;
   }
 }
+
+.container .no-parts {
+  color: white;
+  text-align: center;
+}
 .pagination {
   display: flex;
   flex-wrap: wrap;
